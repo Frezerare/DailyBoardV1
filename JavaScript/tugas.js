@@ -7,7 +7,7 @@ let currentFilter = "semua";
 let callbackOnUpdate = null;
 
 // Helper Debounce Internal
-function debounce(fn, delay = 300) {
+function debounce(fn, delay = 200) {
   let timer;
   return (...args) => {
     clearTimeout(timer);
@@ -69,6 +69,10 @@ export function inisialisasiTugas(containerSection, onUpdateCallback) {
   // List <ul>
   const listUl = document.createElement("ul");
   listUl.id = "daftar-tugas";
+
+  // Pasang Listener Drag & Drop SEKALI SAJA di elemen induk <ul>
+  listUl.addEventListener("dragover", (e) => e.preventDefault());
+  listUl.addEventListener("drop", tanganiDrop);
 
   containerSection.appendChild(inputTugas);
   containerSection.appendChild(tombolTambah);
@@ -137,6 +141,12 @@ function renderTugasKustom(arrayTugas) {
   arrayTugas.forEach((tugas) => {
     const li = document.createElement("li");
     li.dataset.id = tugas.id;
+    li.setAttribute("draggable", true); // Aktifkan draggable langsung di elemen
+
+    // Event saat item mulai di-drag
+    li.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", tugas.id);
+    });
 
     const spanTeks = document.createElement("span");
     spanTeks.textContent = tugas.nama;
@@ -161,42 +171,32 @@ function renderTugasKustom(arrayTugas) {
     list.appendChild(li);
   });
 
-  aktifkanDragDrop();
   if (callbackOnUpdate) callbackOnUpdate();
 }
 
-function aktifkanDragDrop() {
-  const items = document.querySelectorAll("#daftar-tugas li:not(.empty-state)");
-  const list = document.getElementById("daftar-tugas");
+// Fungsi Handing Drop Terpisah
+function tanganiDrop(e) {
+  e.preventDefault();
+  const draggedId = Number(e.dataTransfer.getData("text/plain"));
+  const targetLi = e.target.closest("li");
 
-  items.forEach((item) => {
-    item.setAttribute("draggable", true);
-    item.addEventListener("dragstart", (e) => {
-      e.dataTransfer.setData("text/plain", item.dataset.id);
-    });
-  });
+  if (targetLi && targetLi.dataset.id) {
+    const targetId = Number(targetLi.dataset.id);
+    if (draggedId === targetId) return; // Jika di-drop ke diri sendiri, abaikan
 
-  if (!list) return;
-  list.addEventListener("dragover", (e) => e.preventDefault());
-  list.addEventListener("drop", (e) => {
-    e.preventDefault();
-    const draggedId = Number(e.dataTransfer.getData("text/plain"));
-    const targetLi = e.target.closest("li");
+    const draggedIndex = daftarTugas.findIndex((t) => t.id === draggedId);
+    const targetIndex = daftarTugas.findIndex((t) => t.id === targetId);
 
-    if (targetLi && targetLi.dataset.id) {
-      const targetId = Number(targetLi.dataset.id);
-      const draggedIndex = daftarTugas.findIndex((t) => t.id === draggedId);
-      const targetIndex = daftarTugas.findIndex((t) => t.id === targetId);
+    if (draggedIndex > -1 && targetIndex > -1) {
+      // Pindahkan posisi elemen di array
+      const [movedItem] = daftarTugas.splice(draggedIndex, 1);
+      daftarTugas.splice(targetIndex, 0, movedItem);
 
-      if (draggedIndex > -1 && targetIndex > -1) {
-        const [movedItem] = daftarTugas.splice(draggedIndex, 1);
-        daftarTugas.splice(targetIndex, 0, movedItem);
-
-        simpanKeStorage("daftarTugas", daftarTugas);
-        renderTugas(currentFilter);
-      }
+      // Simpan dan render ulang secara instan
+      simpanKeStorage("daftarTugas", daftarTugas);
+      renderTugas(currentFilter);
     }
-  });
+  }
 }
 
 export function dapatkanStatistikTugas() {
@@ -204,4 +204,4 @@ export function dapatkanStatistikTugas() {
   const selesai = daftarTugas.filter((t) => t.selesai).length;
   const belum = total - selesai;
   return { total, selesai, belum };
-}      
+}
