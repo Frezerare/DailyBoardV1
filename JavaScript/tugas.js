@@ -38,7 +38,7 @@ export function inisialisasiTugas(containerSection, onUpdateCallback) {
 
   // Input Pencarian Menggunakan Debounce
   const inputCari = document.createElement("input");
-  inputCari.placeholder = "Cari tugas...";
+  inputCari.placeholder = "Cari tugas anda...";
 
   const cariTugasDebounced = debounce((kataKunci) => {
     const hasil = daftarTugas.filter((t) =>
