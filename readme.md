@@ -1,33 +1,33 @@
-# 📌 DailyBoard - Dashboard Produktivitas Harian
+# DailyBoard - Dashboard Produktivitas Harian
 
 DailyBoard adalah aplikasi web dashboard harian berbasis **Vanilla JavaScript (ES6 Modules)** yang dirancang untuk membantu pengelolaan tugas harian, catatan cepat, penyajian data cuaca real-time, serta kutipan inspiratif harian.
 
 ---
 
-## 🚀 Fitur Utama
+## Fitur Utama
 
-- **📋 Manajemen Tugas (To-Do List):**
+- Manajemen Tugas (To-Do List):**
   - Tambah, edit (double click), tandai selesai, dan hapus tugas.
   - Filter tugas (*Semua*, *Belum*, *Selesai*).
   - Pencarian tugas real-time yang dioptimalkan dengan fungsi **Debounce**.
   - Fitur **Drag and Drop** untuk mengubah urutan tugas secara manual.
-- **📝 Catatan Cepat (Quick Notes):**
+- Catatan Cepat (Quick Notes):**
   - Simpan catatan pendek lengkap dengan timestamp.
   - Tombol hapus catatan individual.
-- **⛅ Widget Cuaca & Kutipan Async:**
+- Widget Cuaca & Kutipan Async:**
   - Menampilkan prediksi cuaca berbasis API Open-Meteo.
   - Random Quote Generator harian dari API DummyJSON.
-- **📊 Ringkasan Statistik & Backup Data:**
+- Ringkasan Statistik & Backup Data:**
   - Panel counter statistik tugas dan catatan.
   - Fitur **Export & Import Data** dalam format `.json` untuk backup/restore.
-- **🎨 UI Dynamic & Dark Mode:**
+- UI Dynamic & Dark Mode:**
   - Dukungan **Dark Mode** yang tersimpan di LocalStorage.
   - Tampilan **1-Frame / Responsive Grid Dashboard**.
   - **Toast Notifications** dan **Empty State UI** untuk UX yang interaktif.
 
 ---
 
-## 📁 Struktur Proyek
+## Struktur Proyek
 
 ```text
 ├── index.html          # File HTML Utama
