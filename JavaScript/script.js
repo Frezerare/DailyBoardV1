@@ -1,7 +1,7 @@
 // script.js
 import { ambilKutipan, ambilCuaca } from "./api.js";
 import { inisialisasiCatatan, renderCatatan, dapatkanTotalCatatan } from "./catatan.js";
-import { tambahTugas } from "./tugas.js";
+import { inisialisasiTugas, renderTugas, dapatkanStatistikTugas } from "./tugas.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");

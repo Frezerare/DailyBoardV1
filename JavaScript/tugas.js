@@ -1,9 +1,5 @@
 // tugas.js
 
-export function tambahTugas(daftar, nama){
-  return [...daftar, { id: Date.now(), nama, selesai: false}];
-}
-
 import { simpanKeStorage, muatDariStorage } from "./storage.js";
 
 let daftarTugas = [];
@@ -208,4 +204,4 @@ export function dapatkanStatistikTugas() {
   const selesai = daftarTugas.filter((t) => t.selesai).length;
   const belum = total - selesai;
   return { total, selesai, belum };
-}
+}      
