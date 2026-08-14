@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const judul = document.createElement("h2");
-  judul.textContent = "DailyBoard";
+  judul.textContent = "Dashboard Produktivitas Harian";
   header.appendChild(judul);
 
   const statusElemen = document.createElement("span");
