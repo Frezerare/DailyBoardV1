@@ -1,4 +1,3 @@
-// storage.js
 export function simpanKeStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }

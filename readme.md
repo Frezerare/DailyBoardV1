@@ -29,11 +29,10 @@ DailyBoard adalah aplikasi web dashboard harian berbasis **Vanilla JavaScript (E
 
 ## Struktur Proyek
 
-```text
-├── index.html          # File HTML Utama
-├── style.css           # Styling gabungan (Dynamic & Responsive)
-├── storage.js          # Modul pembantu pengelolaan LocalStorage
-├── api.js              # Modul pemanggilan API luar (Cuaca & Kutipan)
-├── catatan.js          # Modul logika & UI fitur Catatan
-├── tugas.js            # Modul logika & UI fitur Tugas (To-Do + Debounce)
-└── script.js           # Main Entry Point & Orchestrator Aplikasi
+index.html          # File HTML Utama
+style.css           # Styling gabungan (Dynamic & Responsive)
+storage.js          # Modul pembantu pengelolaan LocalStorage
+api.js              # Modul pemanggilan API luar (Cuaca & Kutipan)
+catatan.js          # Modul logika & UI fitur Catatan
+tugas.js            # Modul logika & UI fitur Tugas (To-Do + Debounce)
+script.js           # Main Entry Point & Orchestrator Aplikasi

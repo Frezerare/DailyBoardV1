@@ -6,7 +6,6 @@ import { inisialisasiTugas, renderTugas, dapatkanStatistikTugas } from "./tugas.
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");
 
-  // Setup Header & Toast Container
   let header = document.querySelector("header");
   if (!header) {
     header = document.createElement("header");
@@ -21,10 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
   statusElemen.id = "status";
   header.appendChild(statusElemen);
 
-  // Dark Mode Toggle
   const toggleTema = document.createElement("button");
   toggleTema.id = "toggle-tema";
-  toggleTema.textContent = "🌙 Mode Gelap";
+  toggleTema.textContent = "Mode Gelap";
   header.appendChild(toggleTema);
 
   toggleTema.addEventListener("click", () => {
@@ -37,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("dark-mode");
   }
 
-  // Toast Notification System (Minggu 15)
   const toastContainer = document.createElement("div");
   toastContainer.id = "toast-container";
   document.body.appendChild(toastContainer);
@@ -59,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   }
 
-  // Setup Container Sections
   const statsSection = document.createElement("section");
   statsSection.id = "stats";
 
@@ -74,13 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   app.append(statsSection, cuacaSection, tugasSection, catatanSection);
 
-  // Widget Statistik & Backup/Restore Data (Minggu 16)
   function perbaruiStatistik(pesanToast) {
     const { total, selesai, belum } = dapatkanStatistikTugas();
     const totalCatatan = dapatkanTotalCatatan();
 
     statsSection.innerHTML = `
-      <h3>📊 Ringkasan</h3>
+      <h3>Ringkasan</h3>
       <div class="stats-grid">
         <div class="stat-card"><span>Total Tugas</span><strong>${total}</strong></div>
         <div class="stat-card"><span>Selesai</span><strong>${selesai}</strong></div>
@@ -127,11 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
     reader.readAsText(file);
   }
 
-  // Inisialisasi Modul Utama
   inisialisasiTugas(tugasSection, perbaruiStatistik);
   inisialisasiCatatan(catatanSection, perbaruiStatistik);
 
-  // Setup UI Widget Cuaca & Kutipan
   const eKutipan = document.createElement("p");
   eKutipan.id = "kutipan-harian";
   eKutipan.textContent = "Memuat kutipan...";
@@ -158,7 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Load Widget Async
   async function muatSemuaWidget() {
     statusElemen.textContent = "Memuat data...";
     try {

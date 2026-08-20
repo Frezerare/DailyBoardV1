@@ -1,4 +1,3 @@
-// api.js
 export async function ambilKutipan(elemenTarget) {
   try {
     const res = await fetch("https://dummyjson.com/quotes/random");
@@ -13,25 +12,29 @@ export async function ambilKutipan(elemenTarget) {
 }
 
 export async function ambilCuaca(kota, elemenTarget) {
+  const apiKey = "18903514fb960080634adfa5cacdc75e";
   elemenTarget.textContent = "Memuat data cuaca...";
-  try {
-    const geoRes = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${kota}&count=1`
-    );
-    const geoData = await geoRes.json();
 
-    if (!geoData.results || geoData.results.length === 0) {
-      throw new Error("Kota tidak ditemukan");
+  try {
+    const res = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${kota}&appid=${apiKey}&units=metric&lang=id`
+    );
+
+    if (!res.ok) {
+      if (res.status === 404) throw new Error("Kota tidak ditemukan");
+      if (res.status === 401) throw new Error("API Key tidak valid");
+      throw new Error("Gagal mengambil data cuaca");
     }
 
-    const { latitude, longitude, name } = geoData.results[0];
-    const weatherRes = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
-    );
-    const weatherData = await weatherRes.json();
+    const data = await res.json();
 
-    elemenTarget.innerHTML = `<p><strong>${name}</strong>: ${weatherData.current_weather.temperature}°C</p>`;
+    const namaKota = data.name;
+    const suhu = Math.round(data.main.temp);
+    const deskripsi = data.weather[0].description;
+
+    elemenTarget.innerHTML = `<p><strong>${namaKota}</strong>: ${suhu}°C, ${deskripsi}</p>`;
   } catch (error) {
+    console.error("Detail Error Cuaca:", error);
     elemenTarget.textContent = error.message;
   }
 }

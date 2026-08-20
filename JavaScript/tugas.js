@@ -1,12 +1,9 @@
-// tugas.js
-
 import { simpanKeStorage, muatDariStorage } from "./storage.js";
 
 let daftarTugas = [];
 let currentFilter = "semua";
 let callbackOnUpdate = null;
 
-// Helper Debounce Internal
 function debounce(fn, delay = 200) {
   let timer;
   return (...args) => {
@@ -22,7 +19,6 @@ export function inisialisasiTugas(containerSection, onUpdateCallback) {
   ]);
   callbackOnUpdate = onUpdateCallback;
 
-  // Input & Tombol Tambah
   const inputTugas = document.createElement("input");
   inputTugas.type = "text";
   inputTugas.id = "input-tugas";
@@ -36,7 +32,6 @@ export function inisialisasiTugas(containerSection, onUpdateCallback) {
     inputTugas.value = "";
   });
 
-  // Input Pencarian Menggunakan Debounce
   const inputCari = document.createElement("input");
   inputCari.placeholder = "Cari tugas anda...";
 
@@ -52,7 +47,6 @@ export function inisialisasiTugas(containerSection, onUpdateCallback) {
     cariTugasDebounced(kataKunci);
   });
 
-  // Filter Buttons
   const divFilter = document.createElement("div");
   divFilter.className = "filter-container";
 
@@ -66,7 +60,6 @@ export function inisialisasiTugas(containerSection, onUpdateCallback) {
     divFilter.appendChild(btn);
   });
 
-  // List <ul>
   const listUl = document.createElement("ul");
   listUl.id = "daftar-tugas";
 
@@ -141,9 +134,8 @@ function renderTugasKustom(arrayTugas) {
   arrayTugas.forEach((tugas) => {
     const li = document.createElement("li");
     li.dataset.id = tugas.id;
-    li.setAttribute("draggable", true); // Aktifkan draggable langsung di elemen
+    li.setAttribute("draggable", true);
 
-    // Event saat item mulai di-drag
     li.addEventListener("dragstart", (e) => {
       e.dataTransfer.setData("text/plain", tugas.id);
     });
@@ -174,7 +166,6 @@ function renderTugasKustom(arrayTugas) {
   if (callbackOnUpdate) callbackOnUpdate();
 }
 
-// Fungsi Handing Drop Terpisah
 function tanganiDrop(e) {
   e.preventDefault();
   const draggedId = Number(e.dataTransfer.getData("text/plain"));
@@ -182,17 +173,14 @@ function tanganiDrop(e) {
 
   if (targetLi && targetLi.dataset.id) {
     const targetId = Number(targetLi.dataset.id);
-    if (draggedId === targetId) return; // Jika di-drop ke diri sendiri, abaikan
-
+    if (draggedId === targetId) return;
     const draggedIndex = daftarTugas.findIndex((t) => t.id === draggedId);
     const targetIndex = daftarTugas.findIndex((t) => t.id === targetId);
 
     if (draggedIndex > -1 && targetIndex > -1) {
-      // Pindahkan posisi elemen di array
       const [movedItem] = daftarTugas.splice(draggedIndex, 1);
       daftarTugas.splice(targetIndex, 0, movedItem);
 
-      // Simpan dan render ulang secara instan
       simpanKeStorage("daftarTugas", daftarTugas);
       renderTugas(currentFilter);
     }
