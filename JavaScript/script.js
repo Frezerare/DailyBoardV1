@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cuacaSection.appendChild(eKutipan);
 
   const btnRefreshKutipan = document.createElement("button");
+  btnRefreshKutipan.type = "button";
   btnRefreshKutipan.id = "refresh-kutipan";
   btnRefreshKutipan.className = "btn-refresh";
   btnRefreshKutipan.textContent = "Refresh";
@@ -141,6 +142,10 @@ document.addEventListener("DOMContentLoaded", () => {
   kutipanWrapper.appendChild(eKutipan);
   kutipanWrapper.appendChild(btnRefreshKutipan);
   cuacaSection.appendChild(kutipanWrapper);
+
+  btnRefreshKutipan.addEventListener("click", () => {
+    ambilKutipan(eKutipan);
+  });
 
   const divCuacaForm = document.createElement("div");
   const inputKota = document.createElement("input");

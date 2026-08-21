@@ -1,11 +1,10 @@
 :root {
-  /* Material color roles (light) */
-  --md-primary: #6750a4;
-  --md-primary-hover: #55408a;
+  --md-primary: #6e7a8a;
+  --md-primary-hover: #565f6c;
   --md-on-primary: #ffffff;
-  --md-primary-container: #eaddff;
-  --md-secondary: #625b71;
-  --md-tertiary: #7d5260;
+  --md-primary-container: #dde2e6;
+  --md-secondary: #747f8c;
+  --md-tertiary: #8b95a1;
   --md-error: #b3261e;
   --md-error-hover: #932018;
  
