@@ -9,9 +9,9 @@ DailyBoard adalah aplikasi web dashboard harian berbasis **Vanilla JavaScript (E
 - Manajemen Tugas (To-Do List):**
   - Tambah, edit (double click), tandai selesai, dan hapus tugas.
   - Filter tugas (*Semua*, *Belum*, *Selesai*).
-  - Pencarian tugas real-time yang dioptimalkan dengan fungsi **Debounce**.
+  - Pencarian tugas real-time dengan fungsi **Debounce**.
   - Fitur **Drag and Drop** untuk mengubah urutan tugas secara manual.
-- Catatan Cepat (Quick Notes):**
+- Catatan Cepat :**
   - Simpan catatan pendek lengkap dengan timestamp.
   - Tombol hapus catatan individual.
 - Widget Cuaca & Kutipan Async:**

@@ -125,10 +125,22 @@ document.addEventListener("DOMContentLoaded", () => {
   inisialisasiTugas(tugasSection, perbaruiStatistik);
   inisialisasiCatatan(catatanSection, perbaruiStatistik);
 
+  const kutipanWrapper = document.createElement("div");
+  kutipanWrapper.className = "kutipan-refresh";
+
   const eKutipan = document.createElement("p");
   eKutipan.id = "kutipan-harian";
   eKutipan.textContent = "Memuat kutipan...";
   cuacaSection.appendChild(eKutipan);
+
+  const btnRefreshKutipan = document.createElement("button");
+  btnRefreshKutipan.id = "refresh-kutipan";
+  btnRefreshKutipan.className = "btn-refresh";
+  btnRefreshKutipan.textContent = "Refresh";
+
+  kutipanWrapper.appendChild(eKutipan);
+  kutipanWrapper.appendChild(btnRefreshKutipan);
+  cuacaSection.appendChild(kutipanWrapper);
 
   const divCuacaForm = document.createElement("div");
   const inputKota = document.createElement("input");

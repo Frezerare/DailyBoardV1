@@ -11,6 +11,7 @@ export function inisialisasiCatatan(containerSection, onUpdateCallback) {
   const textareaCatatan = document.createElement("textarea");
   textareaCatatan.id = "input-catatan";
   textareaCatatan.placeholder = "Tulis catatan pendek...";
+  textareaCatatan.maxLength = 50;
 
   const btnCatatan = document.createElement("button");
   btnCatatan.textContent = "Simpan Catatan";
@@ -35,7 +36,7 @@ function tambahCatatan(isi) {
   
   daftarCatatan.push({
     id: Date.now(),
-    isi,
+    isi: isi.trim().slice(0, 50),
     tanggal: new Date().toLocaleDateString("id-ID")
   });
   
