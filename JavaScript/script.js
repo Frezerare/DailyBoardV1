@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalCatatan = dapatkanTotalCatatan();
 
     statsSection.innerHTML = `
-      <h3>Ringkasan</h3>
+      <h3>STATISTIK</h3>
       <div class="stats-grid">
         <div class="stat-card"><span>Total Tugas</span><strong>${total}</strong></div>
         <div class="stat-card"><span>Selesai</span><strong>${selesai}</strong></div>
